@@ -27,7 +27,13 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+   // ↓ Add this.
+  void getNext() {
+    current = WordPair.random();
+    notifyListeners();
+  }
 }
+// ...
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -45,7 +51,8 @@ class MyHomePage extends StatelessWidget {
           // ↓ Add this.
           ElevatedButton( // membuat button di dalam body
             onPressed: () { // fungsi yang dieksekusi ketika button di tekan
-              print('button pressed!');
+             appState.getNext();
+          
             },
             child: Text('Next'),
           ),
